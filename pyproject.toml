@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "python-patterns"
+version = "1.0.0"
+description = "A collection of common patterns for python software engineering."
+authors = ["slively"]
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.scripts]
+format = "src.build:format"
+lint = "src.build:lint"
+typecheck = "src.build:typecheck"
+test = "src.build:test"
+test_single = "src.build:test_single"
+build = "src.build:build"
+simple_worker = "src.file_syncer.main.simple_main:run"
+simple_cli = "src.file_syncer.main.simple_cli:run"
+worker = "src.file_syncer.main.main:run"
+cli = "src.file_syncer.main.cli.main:run"
+web = "src.web_syncer.main.main:run"
+web-cli = "src.web.main.cli:run"
+
+[tool.poetry.dependencies]
+python = "~3.7"
+requests = "^2.25.1"
+statsd = "^3.3.0"
+python-json-logger = "^2.0.2"
+pydantic = "^1.9.0"
+fastapi = "^0.75.1"
+uvicorn = "^0.17.6"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.910"
+types-requests = "^2.27.14"
+flake8 = "^4.0.1"
+coverage = "^6.3.2"
+black = "^22.1.0"
+typing-extensions = "^4.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[mypy]
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = false
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+disallow_incomplete_defs = true
+warn_return_any = true
+warn_no_return = true
+check_untyped_defs = true
+python_version = 3.7
