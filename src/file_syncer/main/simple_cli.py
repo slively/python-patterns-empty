@@ -1,6 +1,6 @@
 import argparse
 from logging import getLogger
-from src.file_syncer.main.main import Worker
+from src.file_syncer.main.simple_main import Worker
 from src.utils.main.logger_utils import basic_logging
 
 basic_logging()

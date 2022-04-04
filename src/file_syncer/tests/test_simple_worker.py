@@ -1,6 +1,6 @@
 import os
 from unittest import TestCase
-from src.file_syncer.main.main import Worker
+from src.file_syncer.main.simple_main import Worker
 from src.utils.main.file_utils import clean_and_remake_dir
 from src.utils.main.logger_utils import basic_logging
 from src.utils.main.sleep_utils import sleep_until
