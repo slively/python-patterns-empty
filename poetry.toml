@@ -1,3 +1,5 @@
+# This puts the .venv folder into the project directly.
+# Very useful if you need to package dependencies like in wtm.
 [virtualenvs]
 create = true
 in-project = true
