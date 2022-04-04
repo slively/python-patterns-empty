@@ -1,5 +1,0 @@
-{
-    "python.formatting.provider": "black",
-    "python.defaultInterpreterPath": ".venv/bin/python",
-    "python.linting.mypyPath": ".venv/lib/python3.7/mypy"
-}
