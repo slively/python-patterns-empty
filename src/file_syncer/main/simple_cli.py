@@ -22,8 +22,8 @@ def run() -> None:
     args = parse_args()
     worker = Worker(args.dir, args.sync_dir)
 
-    if args.command == "list":
-        print(worker.list_files())
+    # if args.command == "list":
+    #     print(worker.list_files())
 
 
 if __name__ == "__main__":
