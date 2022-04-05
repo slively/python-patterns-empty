@@ -1,6 +1,5 @@
 import argparse
-from queue import Queue
-from typing import Any, Optional
+from typing import Any
 from src.utils.main.logger_utils import forwarded_logging
 
 forwarded_logging()
@@ -13,8 +12,9 @@ def parse_args() -> Any:
 
 
 def run() -> None:
-    args = parse_args()
+    # args = parse_args()
     # TODO
+    pass
 
 
 if __name__ == "__main__":

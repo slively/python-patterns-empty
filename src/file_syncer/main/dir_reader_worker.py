@@ -26,7 +26,7 @@ class DirReaderWorker(BaseWorker):
         stop_timeout_seconds: Optional[float],
         loop_delay_seconds: float,
         reader: BaseDirReader,
-        event_sender: BaseChangeEventSender
+        event_sender: BaseChangeEventSender,
     ) -> None:
         super().__init__(stop_timeout_seconds)
         self.loop_delay_seconds = loop_delay_seconds
@@ -38,7 +38,7 @@ class DirReaderWorker(BaseWorker):
         Polls the DirReaderApi in a loop while tracking and logging any changes.
         """
         log.info("Starting directory watcher.")
-        
+
         # Initialize state of the directory
         self._current_directory_model = self.reader.read_directory()
 

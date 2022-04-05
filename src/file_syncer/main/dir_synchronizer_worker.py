@@ -1,5 +1,4 @@
 from logging import getLogger
-from queue import Queue
 from typing import Optional
 from src.file_syncer.main.base_dir_synchronizer import BaseDirSynchronizer
 from src.file_syncer.main.base_event_receiver import BaseChangeEventReceiver
@@ -17,12 +16,11 @@ class DirSynchronizerWorker(BaseWorker):
         self,
         stop_timeout_seconds: Optional[float],
         reader: BaseChangeEventReceiver,
-        syncer: BaseDirSynchronizer
+        syncer: BaseDirSynchronizer,
     ) -> None:
         super().__init__(stop_timeout_seconds)
         self.reader = reader
         self.syncer = syncer
-        
 
     def _run(self) -> None:
         """

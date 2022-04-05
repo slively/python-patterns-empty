@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from glob import glob
 import os
 from posixpath import basename
@@ -9,7 +8,6 @@ from src.utils.main.statsd_utils import statsd
 
 
 class DirReaderCtrl:
-
     def __init__(self, dir: str) -> None:
         self.dir = dir
 

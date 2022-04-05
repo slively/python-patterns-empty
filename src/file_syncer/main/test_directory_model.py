@@ -5,20 +5,22 @@ from src.file_syncer.main.file_model import FileModel
 
 class DirectoryModelTest(TestCase):
     def test_directory_with_no_changes(self) -> None:
-        first = DirectoryModel(files=[
-            FileModel(name="name.txt", path="name.txt", is_dir=False, contents="contents asdf")
-        ])
-        second = DirectoryModel(files=[])
+        first = DirectoryModel(
+            files=[
+                FileModel(
+                    name="name.txt",
+                    path="name.txt",
+                    is_dir=False,
+                    contents="contents asdf",
+                )
+            ]
+        )
 
-        self.assertFalse(first.diff(second).changes_detected)
         self.assertEqual(
             DirectoryChangesModel(
-                changes_detected=False,
-                changed_files=[],
-                new_files=[],
-                deleted_files=[]
+                changes_detected=False, changed_files=[], new_files=[], deleted_files=[]
             ),
-            first.diff(first)
+            first.diff(first),
         )
 
     def test_directory_with_new_file(self) -> None:
@@ -42,9 +44,9 @@ class DirectoryModelTest(TestCase):
                 changes_detected=True,
                 changed_files=[],
                 new_files=second.files,
-                deleted_files=[]
+                deleted_files=[],
             ),
-            first.diff(second)
+            first.diff(second),
         )
 
         diff = first.diff(third)
