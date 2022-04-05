@@ -2,7 +2,7 @@ from abc import abstractmethod
 from src.file_syncer.main.directory_model import DirectoryModel
 
 
-class DirReaderApi:
+class BaseDirReader:
     """
     Base interface for the directory reader api.
     """

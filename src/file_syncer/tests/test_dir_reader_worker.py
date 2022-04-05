@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import create_autospec
-from src.file_syncer.main.dir_reader_api import DirReaderApi
+from src.file_syncer.main.dir_reader_base import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryModel
 from src.file_syncer.main.file_model import FileModel
 from src.file_syncer.main.dir_reader_worker import DirReaderWorker
@@ -14,7 +14,7 @@ two_loops = test_loop_delay_seconds * 2
 
 class WorkerTest(TestCase):
     def test_correct_detects_changes_in_directory(self) -> None:
-        api = create_autospec(DirReaderApi)
+        api = create_autospec(BaseDirReader)
         api.read_directory.return_value = DirectoryModel(files=[])
 
         with DirReaderWorker(
