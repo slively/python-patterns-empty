@@ -71,7 +71,7 @@ class DirReaderWorker(BaseWorker):
                         ", ".join(map(lambda f: str(f), changes.changed_files)),
                     )
 
-                self.event_sender.send_event(changes)
+                self.event_sender.send(changes)
             else:
                 log.info("No changes detected.")
 
