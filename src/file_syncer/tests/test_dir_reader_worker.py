@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import create_autospec
-from src.file_syncer.main.dir_reader_base import BaseDirReader
+from src.file_syncer.main.base_dir_reader import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryModel
 from src.file_syncer.main.file_model import FileModel
 from src.file_syncer.main.dir_reader_worker import DirReaderWorker

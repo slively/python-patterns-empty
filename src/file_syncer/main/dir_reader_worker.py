@@ -1,9 +1,9 @@
 from logging import getLogger
 from time import sleep
 from typing import Optional
-from src.file_syncer.main.change_event_api import DirChangeEventApi
+from src.file_syncer.main.base_dir_change_event import DirChangeEventApi
 
-from src.file_syncer.main.dir_reader_base import BaseDirReader
+from src.file_syncer.main.base_dir_reader import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryModel
 from src.utils.main.statsd_utils import statsd
 from src.utils.main.worker_utils import BaseWorker
