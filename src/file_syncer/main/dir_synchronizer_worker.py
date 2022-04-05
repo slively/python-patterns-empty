@@ -1,7 +1,8 @@
 from logging import getLogger
 from typing import Optional
 from src.file_syncer.main.base_dir_synchronizer import BaseDirSynchronizer
-from src.file_syncer.main.base_event_receiver import BaseChangeEventReceiver
+from src.file_syncer.main.directory_model import DirectoryChangesModel
+from src.utils.main.queue_utils import ReceiveEventQueue
 from src.utils.main.worker_utils import BaseWorker
 
 log = getLogger(__name__)
@@ -15,7 +16,7 @@ class DirSynchronizerWorker(BaseWorker):
     def __init__(
         self,
         stop_timeout_seconds: Optional[float],
-        reader: BaseChangeEventReceiver,
+        reader: ReceiveEventQueue[DirectoryChangesModel],
         syncer: BaseDirSynchronizer,
     ) -> None:
         super().__init__(stop_timeout_seconds)
@@ -27,4 +28,6 @@ class DirSynchronizerWorker(BaseWorker):
         Polls the queue and sends events to the api.
         """
         while self.running:
-            self.syncer.sync(self.reader.receive())
+            changes = self.reader.receive()
+            log.info("Received changes: %s", str(changes))
+            self.syncer.sync(changes)

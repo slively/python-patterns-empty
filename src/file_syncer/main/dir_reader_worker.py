@@ -1,11 +1,11 @@
 from logging import getLogger
 from time import sleep
 from typing import Optional
-from src.file_syncer.main.base_change_event_sender import BaseChangeEventSender
 
 from src.file_syncer.main.base_dir_reader import BaseDirReader
-from src.file_syncer.main.directory_model import DirectoryModel
+from src.file_syncer.main.directory_model import DirectoryChangesModel, DirectoryModel
 from src.utils.main.statsd_utils import statsd
+from src.utils.main.queue_utils import SendEventQueue
 from src.utils.main.worker_utils import BaseWorker
 
 log = getLogger(__name__)
@@ -26,7 +26,7 @@ class DirReaderWorker(BaseWorker):
         stop_timeout_seconds: Optional[float],
         loop_delay_seconds: float,
         reader: BaseDirReader,
-        event_sender: BaseChangeEventSender,
+        event_sender: SendEventQueue[DirectoryChangesModel],
     ) -> None:
         super().__init__(stop_timeout_seconds)
         self.loop_delay_seconds = loop_delay_seconds
