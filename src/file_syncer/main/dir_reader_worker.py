@@ -1,7 +1,7 @@
 from logging import getLogger
 from time import sleep
 from typing import Optional
-from src.file_syncer.main.base_dir_change_event import DirChangeEventApi
+from src.file_syncer.main.base_dir_change_event import BaseDirChangeEvent
 
 from src.file_syncer.main.base_dir_reader import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryModel
@@ -26,7 +26,7 @@ class DirReaderWorker(BaseWorker):
         stop_timeout_seconds: Optional[float],
         loop_delay_seconds: float,
         api: BaseDirReader,
-        event_api: DirChangeEventApi = DirChangeEventApi(),
+        event_api: BaseDirChangeEvent
     ) -> None:
         super().__init__(stop_timeout_seconds)
         self.loop_delay_seconds = loop_delay_seconds
