@@ -25,25 +25,27 @@ class DirReaderWorker(BaseWorker):
         self,
         stop_timeout_seconds: Optional[float],
         loop_delay_seconds: float,
-        api: BaseDirReader,
-        event_api: BaseDirChangeEvent
+        reader: BaseDirReader,
+        event_sender: BaseDirChangeEvent
     ) -> None:
         super().__init__(stop_timeout_seconds)
         self.loop_delay_seconds = loop_delay_seconds
-        self.api = api
-        self.event_api = event_api
+        self.reader = reader
+        self.event_sender = event_sender
 
     def _run(self) -> None:
         """
         Polls the DirReaderApi in a loop while tracking and logging any changes.
         """
         log.info("Starting directory watcher.")
-        # initial state of the directory
-        self._current_directory_model = self.api.read_directory()
+        
+        # Initialize state of the directory
+        self._current_directory_model = self.reader.read_directory()
 
+        # Main Loop
         while self.running:
             sleep(self.loop_delay_seconds)
-            new_directory_model = self.api.read_directory()
+            new_directory_model = self.reader.read_directory()
             changes = self._current_directory_model.diff(new_directory_model)
             self._current_directory_model = new_directory_model
 
@@ -68,11 +70,11 @@ class DirReaderWorker(BaseWorker):
                         "Files changed: %s",
                         ", ".join(map(lambda f: str(f), changes.changed_files)),
                     )
+
+                self.event_sender.send_event(changes)
             else:
                 log.info("No changes detected.")
 
             statsd.gauge("new_file_count", self.new_file_count)
             statsd.gauge("changed_file_count", self.changed_file_count)
             statsd.gauge("deleted_file_count", self.deleted_file_count)
-
-            self.event_api.send_event(changes)
