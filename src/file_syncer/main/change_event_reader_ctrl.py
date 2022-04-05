@@ -3,7 +3,7 @@ from src.file_syncer.main.base_event_receiver import BaseChangeEventReceiver
 from queue import Queue
 
 
-class ChangeEventReceiver(BaseChangeEventReceiver):
+class ChangeEventReceiverCtrl(BaseChangeEventReceiver):
     def __init__(self, event_queue: Queue) -> None:
         self.queue = event_queue
 
