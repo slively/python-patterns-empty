@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import create_autospec
-from src.file_syncer.main.base_dir_change_event import BaseDirChangeEvent
+from src.file_syncer.main.base_change_event_sender import BaseChangeEventSender
 from src.file_syncer.main.base_dir_reader import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryChangesModel, DirectoryModel
 from src.file_syncer.main.file_model import FileModel
@@ -19,7 +19,7 @@ class WorkerTest(TestCase):
         reader = create_autospec(BaseDirReader)
         reader.read_directory.return_value = empty_dir
 
-        event_sender = create_autospec(BaseDirChangeEvent)
+        event_sender = create_autospec(BaseChangeEventSender)
 
         with DirReaderWorker(
             stop_timeout_seconds=0.5,
