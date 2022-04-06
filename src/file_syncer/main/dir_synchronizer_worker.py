@@ -16,11 +16,11 @@ class DirSynchronizerWorker(BaseWorker):
     def __init__(
         self,
         stop_timeout_seconds: Optional[float],
-        reader: ReceiveEventQueue[DirectoryChangesModel],
+        events_receiver: ReceiveEventQueue[DirectoryChangesModel],
         syncer: BaseDirSynchronizer,
     ) -> None:
         super().__init__(stop_timeout_seconds)
-        self.reader = reader
+        self.events_receiver = events_receiver
         self.syncer = syncer
 
     def _run(self) -> None:
@@ -28,6 +28,7 @@ class DirSynchronizerWorker(BaseWorker):
         Polls the queue and sends events to the api.
         """
         while self.running:
-            changes = self.reader.receive()
-            log.info("Received changes: %s", str(changes))
-            self.syncer.sync(changes)
+            changes = self.events_receiver.receive()
+            if changes is not None:
+                log.info("Received changes: %s", str(changes))
+                self.syncer.sync(changes)

@@ -1,13 +1,14 @@
 from glob import glob
 import os
 from posixpath import basename
+from src.file_syncer.main.base_dir_reader import BaseDirReader
 from src.file_syncer.main.directory_model import DirectoryModel
 from src.file_syncer.main.file_model import FileModel
 from src.utils.main.file_utils import clean_and_remake_dir
 from src.utils.main.statsd_utils import statsd
 
 
-class DirReaderCtrl:
+class DirReaderCtrl(BaseDirReader):
     def __init__(self, dir: str) -> None:
         self.dir = dir
 
