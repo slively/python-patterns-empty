@@ -1,10 +1,9 @@
 import argparse
 from typing import Any
-from src.file_syncer.main import dir_synchronizer_worker
-from src.file_syncer.main.dir_reader_ctrl import DirReaderCtrl
-from src.file_syncer.main.dir_reader_worker import DirReaderWorker
-from src.file_syncer.main.dir_synchronizer_ctrl import DirSynchronizerCtrl
-from src.file_syncer.main.dir_synchronizer_worker import DirSynchronizerWorker
+from src.file_syncer.main.dir_reader.dir_reader_ctrl import DirReaderCtrl
+from src.file_syncer.main.dir_reader.dir_reader_worker import DirReaderWorker
+from src.file_syncer.main.dir_sync.dir_synchronizer_ctrl import DirSynchronizerCtrl
+from src.file_syncer.main.dir_sync.dir_synchronizer_worker import DirSynchronizerWorker
 from src.file_syncer.main.directory_model import DirectoryChangesModel
 from src.utils.main.logger_utils import forwarded_logging
 from src.utils.main.queue_utils import EventQueue
@@ -37,7 +36,7 @@ def parse_args() -> Any:
 
 def run() -> None:
     args = parse_args()
-    
+
     # Events
     event_queue = EventQueue[DirectoryChangesModel]()
 
